@@ -1,0 +1,4 @@
+﻿  m.cpp
+C:\Users\mkrice\source\repos\chap10\MyVector2\m.cpp(7,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\mkrice\source\repos\chap10\MyVector2\m.cpp(27,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  MyVector2.vcxproj -> C:\Users\mkrice\source\repos\chap10\Debug\MyVector2.exe

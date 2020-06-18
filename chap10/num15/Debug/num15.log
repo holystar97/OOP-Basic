@@ -1,0 +1,4 @@
+﻿  소스.cpp
+C:\Users\mkrice\source\repos\chap10\num15\소스.cpp(41,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\mkrice\source\repos\chap10\num15\소스.cpp(51,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  num15.vcxproj -> C:\Users\mkrice\source\repos\chap10\Debug\num15.exe
