@@ -8,8 +8,6 @@ using namespace std;
 #define FILE_PATH "C:\\Users\\mkrice\\Desktop\\words.txt"
 
 int main() {
-
-	int wordCount = 0;
 	cout << "---------------------------" << endl;
 	cout << "지금부터 행맨 게임을 시작합니다." << endl;
 	cout << "---------------------------" << endl;
@@ -25,11 +23,20 @@ int main() {
 
 	while (getline(readFile, word)) {
 		v_str.push_back(word);
-		wordCount++;
 	}
 	readFile.close();
 	int error = 0;
 	bool finish = false;
+	string temp;
+	char userinput;
+
+	
+	//정답 가져오기
+	string answer;
+	string quizword;
+	char c0 = NULL, c1 = NULL, c2 = NULL;
+	int x1 = 0, x2 = 0;
+
 
 	while (true) {
 	
@@ -43,9 +50,12 @@ int main() {
 				cout << "종료합니다." << endl;
 				break;
 			}
-			else {
+			else if(f=='y'){
 				finish = false;
 				continue;
+			}
+			else {
+				cout << "다시 입력하세요" << endl;
 			}
 		}
 
@@ -53,65 +63,88 @@ int main() {
 		else {
 			//난수를 발생 시켜서 단어를 생성한다. 
 			srand((unsigned)time(0));
-			int n = rand() % wordCount;
+			int n = rand() % v_str.size();
+			answer = v_str[n];
+			quizword = answer;
 
-			//정답 가져오기
-			string answer = v_str[n];
+			if (answer.size() == 1) {
+				c0 = answer.at(0);
+				quizword.replace(0, 1, "-");
 
-			//지울 포인트 지정한다. 
-			int size = answer.size() - 1;
-			int x1 = rand() % size;
-			int x2;
-
-			while (true) {
-				x2 = rand() % size;
-				if (x2 != x1) {
-					break;
-				}
 			}
 
-			//퀴즈용 단어를 생성한다.
-			string quizword = answer;
-			char c1 = answer.at(x1);
-			char c2 = answer.at(x2);
+			else {
+				//난수를 발생 시켜서 단어를 생성한다. 
+				srand((unsigned)time(0));
+				int n = rand() % v_str.size();
+				answer = v_str[n];
+				quizword = answer;
 
-			quizword.replace(x1, 1, "-");
-			quizword.replace(x2, 1, "-");
+				//지울 포인트 지정한다. 
+				int size = answer.size() - 1;
+				x1 = rand() % size;
 
-			for (;;) {
-			
-				string temp;
-				char userinput;
-
-				cout << "문제 단어 : " << quizword << endl;
-				cout << ">> ";
-				cin >> userinput;
-
-				if (answer.at(x1) == userinput && quizword.at(x1)=='-') {
-					temp = c1;
-					quizword.replace(x1, 1, temp);
-				}
-				else if (answer.at(x2) == userinput && quizword.at(x2) == '-') {
-					temp = c2;
-					quizword.replace(x2, 1, temp);
-				}
-				else {
-					error++;
-					if (error == 5) {
-						cout << "5번 실패 하였습니다. " << endl;
-						cout << answer << endl;
+				while (true) {
+					x2 = rand() % size;
+					if (x2 != x1) {
 						break;
 					}
 				}
 
-				if (quizword == answer) {
-					cout << quizword << endl;
-					finish = true;
-					break;
-				}
-			
+
+				c1 = answer.at(x1);
+				c2 = answer.at(x2);
+
+				quizword.replace(x1, 1, "-");
+				quizword.replace(x2, 1, "-");
 			}
+
+			for (;;) {
+		
+					cout << "문제 단어 : " << quizword << endl;
+					cout << ">> ";
+					cin >> userinput;
+
+					if (answer.size() == 1) {
+						if (answer.at(0) == userinput && quizword.at(0) == '-') {
+							temp = c0;
+							quizword.replace(0, 1, temp);
+						}
+						else {
+							error++;
+							if (error == 5) {
+								cout << "5번 실패 하였습니다. " << endl;
+								cout << answer << endl;
+								break;
+							}
+						}
+					}
+					else {
+						if (answer.at(x1) == userinput && quizword.at(x1) == '-') {
+							temp = c1;
+							quizword.replace(x1, 1, temp);
+						}
+						else if (answer.at(x2) == userinput && quizword.at(x2) == '-') {
+							temp = c2;
+							quizword.replace(x2, 1, temp);
+						}
+						else {
+							error++;
+							if (error == 5) {
+								cout << "5번 실패 하였습니다. " << endl;
+								cout << answer << endl;
+								break;
+							}
+						}
+					}
+
+					if (quizword == answer) {
+						cout << quizword << endl;
+						finish = true;
+						break;
+					}
+			}
+
 		}
 	}
 }
-

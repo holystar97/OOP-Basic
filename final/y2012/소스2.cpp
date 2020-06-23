@@ -14,7 +14,14 @@ public:
 };
 // 후행 연산자 ++를 Circle의 멤버함수가 아닌 외부 함수로 중복하라
 
+Circle operator ++ (Circle& op, int x) {
+	Circle c = op;
+	op.radius++;
+	return c;
+}
+
 int main() {
 	Circle donut;
 	donut++;
 }
+
