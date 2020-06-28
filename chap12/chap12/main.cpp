@@ -90,8 +90,7 @@ int main() {
 						break;
 					}
 				}
-
-
+			
 				c1 = answer.at(x1);
 				c2 = answer.at(x2);
 
@@ -114,7 +113,7 @@ int main() {
 							error++;
 							if (error == 5) {
 								cout << "5번 실패 하였습니다. " << endl;
-								cout << answer << endl;
+								
 								break;
 							}
 						}
